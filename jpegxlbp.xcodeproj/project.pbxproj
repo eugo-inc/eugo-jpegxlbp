@@ -11,6 +11,10 @@
 		AD66546E2E8AEAF500A2C368 /* previewext.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD66545F2E8AEAF400A2C368 /* previewext.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD6654772E8AF09C00A2C368 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AD6654762E8AF09C00A2C368 /* SDWebImage */; };
 		AD6654792E8AF0B200A2C368 /* SDWebImageJPEGXLCoder in Frameworks */ = {isa = PBXBuildFile; productRef = AD6654782E8AF0B200A2C368 /* SDWebImageJPEGXLCoder */; };
+		AD6654992E8B264500A2C368 /* QuickLookThumbnailing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD6654982E8B264500A2C368 /* QuickLookThumbnailing.framework */; };
+		AD6654A02E8B264500A2C368 /* thumbext.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD6654972E8B264500A2C368 /* thumbext.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AD6654A82E8B30DD00A2C368 /* SDWebImageJPEGXLCoder in Frameworks */ = {isa = PBXBuildFile; productRef = AD6654A72E8B30DD00A2C368 /* SDWebImageJPEGXLCoder */; };
+		AD6654AA2E8B30E000A2C368 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AD6654A92E8B30E000A2C368 /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -20,6 +24,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = AD66545E2E8AEAF400A2C368;
 			remoteInfo = previewext;
+		};
+		AD66549E2E8B264500A2C368 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD66543B2E8AEAB700A2C368 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD6654962E8B264500A2C368;
+			remoteInfo = thumbext;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -31,6 +42,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				AD66546E2E8AEAF500A2C368 /* previewext.appex in Embed Foundation Extensions */,
+				AD6654A02E8B264500A2C368 /* thumbext.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -41,6 +53,10 @@
 		AD6654432E8AEAB800A2C368 /* jpegxlbp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jpegxlbp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD66545F2E8AEAF400A2C368 /* previewext.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = previewext.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD6654612E8AEAF500A2C368 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		AD6654972E8B264500A2C368 /* thumbext.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = thumbext.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD6654982E8B264500A2C368 /* QuickLookThumbnailing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLookThumbnailing.framework; path = System/Library/Frameworks/QuickLookThumbnailing.framework; sourceTree = SDKROOT; };
+		AD6654A52E8B30D100A2C368 /* SDWebImage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SDWebImage; path = "/Users/gorloff/Library/Developer/Xcode/DerivedData/jpegxlbp-allyhdfngzknexdicixdlqfejycm/SourcePackages/checkouts/SDWebImage"; sourceTree = "<absolute>"; };
+		AD6654A62E8B30D800A2C368 /* SDWebImageJPEGXLCoder */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SDWebImageJPEGXLCoder; path = "/Users/gorloff/Library/Developer/Xcode/DerivedData/jpegxlbp-allyhdfngzknexdicixdlqfejycm/SourcePackages/checkouts/SDWebImageJPEGXLCoder"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -57,6 +73,13 @@
 				Info.plist,
 			);
 			target = AD66545E2E8AEAF400A2C368 /* previewext */;
+		};
+		AD6654A42E8B264600A2C368 /* Exceptions for "thumbext" folder in "thumbext" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = AD6654962E8B264500A2C368 /* thumbext */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -75,6 +98,14 @@
 				AD6654722E8AEAF500A2C368 /* Exceptions for "previewext" folder in "previewext" target */,
 			);
 			path = previewext;
+			sourceTree = "<group>";
+		};
+		AD66549A2E8B264500A2C368 /* thumbext */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				AD6654A42E8B264600A2C368 /* Exceptions for "thumbext" folder in "thumbext" target */,
+			);
+			path = thumbext;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -97,6 +128,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AD6654942E8B264500A2C368 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD6654AA2E8B30E000A2C368 /* SDWebImage in Frameworks */,
+				AD6654A82E8B30DD00A2C368 /* SDWebImageJPEGXLCoder in Frameworks */,
+				AD6654992E8B264500A2C368 /* QuickLookThumbnailing.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -105,6 +146,7 @@
 			children = (
 				AD6654452E8AEAB800A2C368 /* jpegxlbp */,
 				AD6654632E8AEAF500A2C368 /* previewext */,
+				AD66549A2E8B264500A2C368 /* thumbext */,
 				AD6654602E8AEAF500A2C368 /* Frameworks */,
 				AD6654442E8AEAB800A2C368 /* Products */,
 			);
@@ -115,6 +157,7 @@
 			children = (
 				AD6654432E8AEAB800A2C368 /* jpegxlbp.app */,
 				AD66545F2E8AEAF400A2C368 /* previewext.appex */,
+				AD6654972E8B264500A2C368 /* thumbext.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -123,6 +166,9 @@
 			isa = PBXGroup;
 			children = (
 				AD6654612E8AEAF500A2C368 /* QuickLook.framework */,
+				AD6654A62E8B30D800A2C368 /* SDWebImageJPEGXLCoder */,
+				AD6654A52E8B30D100A2C368 /* SDWebImage */,
+				AD6654982E8B264500A2C368 /* QuickLookThumbnailing.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -143,6 +189,7 @@
 			);
 			dependencies = (
 				AD66546D2E8AEAF500A2C368 /* PBXTargetDependency */,
+				AD66549F2E8B264500A2C368 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				AD6654452E8AEAB800A2C368 /* jpegxlbp */,
@@ -178,6 +225,30 @@
 			productReference = AD66545F2E8AEAF400A2C368 /* previewext.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		AD6654962E8B264500A2C368 /* thumbext */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD6654A12E8B264600A2C368 /* Build configuration list for PBXNativeTarget "thumbext" */;
+			buildPhases = (
+				AD6654932E8B264500A2C368 /* Sources */,
+				AD6654942E8B264500A2C368 /* Frameworks */,
+				AD6654952E8B264500A2C368 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				AD66549A2E8B264500A2C368 /* thumbext */,
+			);
+			name = thumbext;
+			packageProductDependencies = (
+				AD6654A72E8B30DD00A2C368 /* SDWebImageJPEGXLCoder */,
+				AD6654A92E8B30E000A2C368 /* SDWebImage */,
+			);
+			productName = thumbext;
+			productReference = AD6654972E8B264500A2C368 /* thumbext.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -192,6 +263,9 @@
 						CreatedOnToolsVersion = 26.0;
 					};
 					AD66545E2E8AEAF400A2C368 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+					AD6654962E8B264500A2C368 = {
 						CreatedOnToolsVersion = 26.0;
 					};
 				};
@@ -216,6 +290,7 @@
 			targets = (
 				AD6654422E8AEAB800A2C368 /* jpegxlbp */,
 				AD66545E2E8AEAF400A2C368 /* previewext */,
+				AD6654962E8B264500A2C368 /* thumbext */,
 			);
 		};
 /* End PBXProject section */
@@ -229,6 +304,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AD66545D2E8AEAF400A2C368 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD6654952E8B264500A2C368 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -252,6 +334,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AD6654932E8B264500A2C368 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -259,6 +348,11 @@
 			isa = PBXTargetDependency;
 			target = AD66545E2E8AEAF400A2C368 /* previewext */;
 			targetProxy = AD66546C2E8AEAF500A2C368 /* PBXContainerItemProxy */;
+		};
+		AD66549F2E8B264500A2C368 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD6654962E8B264500A2C368 /* thumbext */;
+			targetProxy = AD66549E2E8B264500A2C368 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -515,6 +609,64 @@
 			};
 			name = Release;
 		};
+		AD6654A22E8B264600A2C368 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 954C5528D6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = thumbext/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = thumbext;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = eugo.jpegxlbp.thumbext;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AD6654A32E8B264600A2C368 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 954C5528D6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = thumbext/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = thumbext;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = eugo.jpegxlbp.thumbext;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -541,6 +693,15 @@
 			buildConfigurations = (
 				AD6654702E8AEAF500A2C368 /* Debug */,
 				AD6654712E8AEAF500A2C368 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD6654A12E8B264600A2C368 /* Build configuration list for PBXNativeTarget "thumbext" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD6654A22E8B264600A2C368 /* Debug */,
+				AD6654A32E8B264600A2C368 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -576,6 +737,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AD6654742E8AEF0F00A2C368 /* XCRemoteSwiftPackageReference "SDWebImageJPEGXLCoder" */;
 			productName = SDWebImageJPEGXLCoder;
+		};
+		AD6654A72E8B30DD00A2C368 /* SDWebImageJPEGXLCoder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD6654742E8AEF0F00A2C368 /* XCRemoteSwiftPackageReference "SDWebImageJPEGXLCoder" */;
+			productName = SDWebImageJPEGXLCoder;
+		};
+		AD6654A92E8B30E000A2C368 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AD6654752E8AF09C00A2C368 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

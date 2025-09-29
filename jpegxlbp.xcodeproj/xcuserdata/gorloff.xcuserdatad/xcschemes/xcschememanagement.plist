@@ -14,10 +14,28 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>previewext2.xcscheme_^#shared#^_</key>
+		<key>thumbext.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>3</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>AD6654422E8AEAB800A2C368</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AD66545E2E8AEAF400A2C368</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AD6654962E8B264500A2C368</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
