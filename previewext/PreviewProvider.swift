@@ -7,50 +7,24 @@
 
 import QuickLook
 
+import SDWebImage
+import SDWebImageJPEGXLCoder
+
+
+final
 class PreviewProvider: QLPreviewProvider, QLPreviewingController {
-    
-
-    /*
-     Use a QLPreviewProvider to provide data-based previews.
-     
-     To set up your extension as a data-based preview extension:
-
-     - Modify the extension's Info.plist by setting
-       <key>QLIsDataBasedPreview</key>
-       <true/>
-     
-     - Add the supported content types to QLSupportedContentTypes array in the extension's Info.plist.
-
-     - Remove
-       <key>NSExtensionMainStoryboard</key>
-       <string>MainInterface</string>
-     
-       and replace it by setting the NSExtensionPrincipalClass to this class, e.g.
-       <key>NSExtensionPrincipalClass</key>
-       <string>$(PRODUCT_MODULE_NAME).PreviewProvider</string>
-     
-     - Implement providePreview(for:)
-     */
-    
     func providePreview(for request: QLFilePreviewRequest) async throws -> QLPreviewReply {
-    
-        //You can create a QLPreviewReply in several ways, depending on the format of the data you want to return.
-        //To return Data of a supported content type:
-        
-        let contentType = UTType.plainText // replace with your data type
-        
-        let reply = QLPreviewReply.init(dataOfContentType: contentType, contentSize: CGSize.init(width: 800, height: 800)) { (replyToUpdate : QLPreviewReply) in
-
-            let data = Data("Raptors!!!".utf8)
-            
-            //setting the stringEncoding for text and html data is optional and defaults to String.Encoding.utf8
-            replyToUpdate.stringEncoding = .utf8
-            
-            //initialize your data here
-            
-            return data
+        let jpegxlData = try Data(contentsOf: request.fileURL)
+        guard let decodedImage = SDImageJPEGXLCoder.shared.decodedImage(with: jpegxlData, options: nil) else {
+            throw NSError(domain: "eugo", code: 1161)
         }
-                
+        
+        let reply = QLPreviewReply(dataOfContentType: .jpeg, contentSize: decodedImage.size) { replyToUpdate in
+            // As the `decodedImage` is always a valid JPEG XL image at this momenet, this **must** always succeed.
+            // `compressionQuality` grows from 0 to 1 in contrast to `libjxl`'s `distance`
+            return decodedImage.jpegData(compressionQuality: 1.0)!
+        }
+
         return reply
     }
 
