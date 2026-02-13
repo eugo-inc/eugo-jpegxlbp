@@ -1,5 +1,5 @@
 {
-  "originHash" : "4f2f5f735896791e5c95feb24fa6ec1d53cca00602e2f9c6ba5a50e4b52c86e9",
+  "originHash" : "f5691c4c4a7592d68de91fce9a43b726a4befbcc9c4cd90337e028b46cc5ec0d",
   "pins" : [
     {
       "identity" : "libjxl-xcode",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SDWebImage/SDWebImage.git",
       "state" : {
-        "revision" : "34cf2423a2c4088d06a3b08655603b5bc3eeeb3a",
-        "version" : "5.21.2"
+        "revision" : "449e8f8f10377f620db8ad22ea81208eecf6325f",
+        "version" : "5.21.6"
       }
     },
     {

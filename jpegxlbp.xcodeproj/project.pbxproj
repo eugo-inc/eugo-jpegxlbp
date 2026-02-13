@@ -15,6 +15,7 @@
 		AD6654A02E8B264500A2C368 /* thumbext.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD6654972E8B264500A2C368 /* thumbext.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AD6654A82E8B30DD00A2C368 /* SDWebImageJPEGXLCoder in Frameworks */ = {isa = PBXBuildFile; productRef = AD6654A72E8B30DD00A2C368 /* SDWebImageJPEGXLCoder */; };
 		AD6654AA2E8B30E000A2C368 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AD6654A92E8B30E000A2C368 /* SDWebImage */; };
+		ADA194222F3F40A700F26337 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = ADA194212F3F40A000F26337 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		AD6654982E8B264500A2C368 /* QuickLookThumbnailing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLookThumbnailing.framework; path = System/Library/Frameworks/QuickLookThumbnailing.framework; sourceTree = SDKROOT; };
 		AD6654A52E8B30D100A2C368 /* SDWebImage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SDWebImage; path = "/Users/gorloff/Library/Developer/Xcode/DerivedData/jpegxlbp-allyhdfngzknexdicixdlqfejycm/SourcePackages/checkouts/SDWebImage"; sourceTree = "<absolute>"; };
 		AD6654A62E8B30D800A2C368 /* SDWebImageJPEGXLCoder */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SDWebImageJPEGXLCoder; path = "/Users/gorloff/Library/Developer/Xcode/DerivedData/jpegxlbp-allyhdfngzknexdicixdlqfejycm/SourcePackages/checkouts/SDWebImageJPEGXLCoder"; sourceTree = "<absolute>"; };
+		ADA194212F3F40A000F26337 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -144,6 +146,7 @@
 		AD66543A2E8AEAB700A2C368 = {
 			isa = PBXGroup;
 			children = (
+				ADA194212F3F40A000F26337 /* README.md */,
 				AD6654452E8AEAB800A2C368 /* jpegxlbp */,
 				AD6654632E8AEAF500A2C368 /* previewext */,
 				AD66549A2E8B264500A2C368 /* thumbext */,
@@ -257,7 +260,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2600;
-				LastUpgradeCheck = 2600;
+				LastUpgradeCheck = 2620;
 				TargetAttributes = {
 					AD6654422E8AEAB800A2C368 = {
 						CreatedOnToolsVersion = 26.0;
@@ -300,6 +303,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADA194222F3F40A700F26337 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,21 +368,22 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 954C5528D6;
+				DEVELOPMENT_TEAM = FL3NGSAHDH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = jpegxlbp/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = eugo.jpegxlbp;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = io.eugo.experimental.jpegxlbp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -397,21 +402,22 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 954C5528D6;
+				DEVELOPMENT_TEAM = FL3NGSAHDH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = jpegxlbp/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = eugo.jpegxlbp;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = io.eugo.experimental.jpegxlbp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -458,6 +464,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = HCF4B6G79X;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -481,9 +488,13 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				OTHER_CFLAGS = "-mcpu=apple-a12";
-				OTHER_SWIFT_FLAGS = "-Xcc -mcpu=apple-a12 -Xllvm -mcpu=apple-a12";
+				OTHER_CFLAGS = (
+					"-mcpu=apple-a12",
+					"-mtune=apple-m4",
+				);
+				OTHER_SWIFT_FLAGS = "-target-cpu apple-a12 -Xcc -mcpu=apple-a12 -Xcc -mtune=apple-m4 -Xllvm -mcpu=apple-a12";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 6.0;
@@ -525,6 +536,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = HCF4B6G79X;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -542,9 +554,13 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				OTHER_CFLAGS = "-mcpu=apple-a12";
-				OTHER_SWIFT_FLAGS = "-Xcc -mcpu=apple-a12 -Xllvm -mcpu=apple-a12";
+				OTHER_CFLAGS = (
+					"-mcpu=apple-a12",
+					"-mtune=apple-m4",
+				);
+				OTHER_SWIFT_FLAGS = "-target-cpu apple-a12 -Xcc -mcpu=apple-a12 -Xcc -mtune=apple-m4 -Xllvm -mcpu=apple-a12";
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_VERSION = 6.0;
 				VALIDATE_PRODUCT = YES;
@@ -556,19 +572,19 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 954C5528D6;
+				DEVELOPMENT_TEAM = FL3NGSAHDH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = previewext/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = previewext;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = eugo.jpegxlbp.previewext;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = io.eugo.experimental.jpegxlbp.previewext;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -585,19 +601,19 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 954C5528D6;
+				DEVELOPMENT_TEAM = FL3NGSAHDH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = previewext/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = previewext;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = eugo.jpegxlbp.previewext;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = io.eugo.experimental.jpegxlbp.previewext;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -614,19 +630,19 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 954C5528D6;
+				DEVELOPMENT_TEAM = FL3NGSAHDH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = thumbext/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = thumbext;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = eugo.jpegxlbp.thumbext;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = io.eugo.experimental.jpegxlbp.thumbext;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -643,19 +659,19 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 954C5528D6;
+				DEVELOPMENT_TEAM = FL3NGSAHDH;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = thumbext/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = thumbext;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = eugo.jpegxlbp.thumbext;
+				MARKETING_VERSION = 1.1;
+				PRODUCT_BUNDLE_IDENTIFIER = io.eugo.experimental.jpegxlbp.thumbext;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -722,7 +738,7 @@
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 5.21.2;
+				minimumVersion = 5.21.6;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

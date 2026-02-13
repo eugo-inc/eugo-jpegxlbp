@@ -5,6 +5,7 @@
 //  Created by Vyacheslav Gorlov on 9/30/25.
 //
 
+
 import UIKit
 import QuickLookThumbnailing
 
@@ -46,20 +47,6 @@ class ThumbnailProvider: QLThumbnailProvider {
                 return false
             }
         }), nil)
-        
-        /*
-        
-        // Second way: Draw the thumbnail into a context passed to your block, set up with Core Graphics's coordinate system.
-        handler(QLThumbnailReply(contextSize: request.maximumSize, drawing: { (context) -> Bool in
-            // Draw the thumbnail here.
-         
-            // Return true if the thumbnail was successfully drawn inside this block.
-            return true
-        }), nil)
-         
-        // Third way: Set an image file URL.
-        handler(QLThumbnailReply(imageFileURL: Bundle.main.url(forResource: "fileThumbnail", withExtension: "jpg")!), nil)
-        
-        */
     }
+    
 }
