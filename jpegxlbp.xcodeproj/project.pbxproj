@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 90;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -38,15 +38,13 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		AD6654732E8AEAF500A2C368 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
 			dstPath = "";
-			dstSubfolderSpec = 13;
+			dstSubfolder = PlugIns;
 			files = (
 				AD66546E2E8AEAF500A2C368 /* previewext.appex in Embed Foundation Extensions */,
 				AD6654A02E8B264500A2C368 /* thumbext.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -115,30 +113,24 @@
 /* Begin PBXFrameworksBuildPhase section */
 		AD6654402E8AEAB800A2C368 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AD66545C2E8AEAF400A2C368 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				AD6654792E8AF0B200A2C368 /* SDWebImageJPEGXLCoder in Frameworks */,
 				AD6654772E8AF09C00A2C368 /* SDWebImage in Frameworks */,
 				AD6654622E8AEAF500A2C368 /* QuickLook.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AD6654942E8B264500A2C368 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				AD6654AA2E8B30E000A2C368 /* SDWebImage in Frameworks */,
 				AD6654A82E8B30DD00A2C368 /* SDWebImageJPEGXLCoder in Frameworks */,
 				AD6654992E8B264500A2C368 /* QuickLookThumbnailing.framework in Frameworks */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
@@ -198,8 +190,6 @@
 				AD6654452E8AEAB800A2C368 /* jpegxlbp */,
 			);
 			name = jpegxlbp;
-			packageProductDependencies = (
-			);
 			productName = jpegxlbp;
 			productReference = AD6654432E8AEAB800A2C368 /* jpegxlbp.app */;
 			productType = "com.apple.product-type.application";
@@ -213,8 +203,6 @@
 				AD66545D2E8AEAF400A2C368 /* Resources */,
 			);
 			buildRules = (
-			);
-			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
 				AD6654632E8AEAF500A2C368 /* previewext */,
@@ -237,8 +225,6 @@
 				AD6654952E8B264500A2C368 /* Resources */,
 			);
 			buildRules = (
-			);
-			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
 				AD66549A2E8B264500A2C368 /* thumbext */,
@@ -286,7 +272,7 @@
 				AD6654742E8AEF0F00A2C368 /* XCRemoteSwiftPackageReference "SDWebImageJPEGXLCoder" */,
 				AD6654752E8AF09C00A2C368 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
-			preferredProjectObjectVersion = 77;
+			preferredProjectObjectVersion = 90;
 			productRefGroup = AD6654442E8AEAB800A2C368 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -301,49 +287,37 @@
 /* Begin PBXResourcesBuildPhase section */
 		AD6654412E8AEAB800A2C368 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 				ADA194222F3F40A700F26337 /* README.md in Resources */,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AD66545D2E8AEAF400A2C368 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AD6654952E8B264500A2C368 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AD66543F2E8AEAB800A2C368 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AD66545B2E8AEAF400A2C368 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 		AD6654932E8B264500A2C368 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
@@ -361,7 +335,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		AD6654572E8AEABB00A2C368 /* Debug */ = {
+		AD6654572E8AEABB00A2C368 /* Debug configuration for PBXNativeTarget "jpegxlbp" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -396,7 +370,7 @@
 			};
 			name = Debug;
 		};
-		AD6654582E8AEABB00A2C368 /* Release */ = {
+		AD6654582E8AEABB00A2C368 /* Release configuration for PBXNativeTarget "jpegxlbp" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -431,7 +405,7 @@
 			};
 			name = Release;
 		};
-		AD6654592E8AEABB00A2C368 /* Debug */ = {
+		AD6654592E8AEABB00A2C368 /* Debug configuration for PBXProject "jpegxlbp" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -503,7 +477,7 @@
 			};
 			name = Debug;
 		};
-		AD66545A2E8AEABB00A2C368 /* Release */ = {
+		AD66545A2E8AEABB00A2C368 /* Release configuration for PBXProject "jpegxlbp" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -569,7 +543,7 @@
 			};
 			name = Release;
 		};
-		AD6654702E8AEAF500A2C368 /* Debug */ = {
+		AD6654702E8AEAF500A2C368 /* Debug configuration for PBXNativeTarget "previewext" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -598,7 +572,7 @@
 			};
 			name = Debug;
 		};
-		AD6654712E8AEAF500A2C368 /* Release */ = {
+		AD6654712E8AEAF500A2C368 /* Release configuration for PBXNativeTarget "previewext" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -627,7 +601,7 @@
 			};
 			name = Release;
 		};
-		AD6654A22E8B264600A2C368 /* Debug */ = {
+		AD6654A22E8B264600A2C368 /* Debug configuration for PBXNativeTarget "thumbext" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -656,7 +630,7 @@
 			};
 			name = Debug;
 		};
-		AD6654A32E8B264600A2C368 /* Release */ = {
+		AD6654A32E8B264600A2C368 /* Release configuration for PBXNativeTarget "thumbext" */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -691,37 +665,33 @@
 		AD66543E2E8AEAB700A2C368 /* Build configuration list for PBXProject "jpegxlbp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AD6654592E8AEABB00A2C368 /* Debug */,
-				AD66545A2E8AEABB00A2C368 /* Release */,
+				AD6654592E8AEABB00A2C368 /* Debug configuration for PBXProject "jpegxlbp" */,
+				AD66545A2E8AEABB00A2C368 /* Release configuration for PBXProject "jpegxlbp" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		AD6654562E8AEABB00A2C368 /* Build configuration list for PBXNativeTarget "jpegxlbp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AD6654572E8AEABB00A2C368 /* Debug */,
-				AD6654582E8AEABB00A2C368 /* Release */,
+				AD6654572E8AEABB00A2C368 /* Debug configuration for PBXNativeTarget "jpegxlbp" */,
+				AD6654582E8AEABB00A2C368 /* Release configuration for PBXNativeTarget "jpegxlbp" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		AD66546F2E8AEAF500A2C368 /* Build configuration list for PBXNativeTarget "previewext" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AD6654702E8AEAF500A2C368 /* Debug */,
-				AD6654712E8AEAF500A2C368 /* Release */,
+				AD6654702E8AEAF500A2C368 /* Debug configuration for PBXNativeTarget "previewext" */,
+				AD6654712E8AEAF500A2C368 /* Release configuration for PBXNativeTarget "previewext" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 		AD6654A12E8B264600A2C368 /* Build configuration list for PBXNativeTarget "thumbext" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AD6654A22E8B264600A2C368 /* Debug */,
-				AD6654A32E8B264600A2C368 /* Release */,
+				AD6654A22E8B264600A2C368 /* Debug configuration for PBXNativeTarget "thumbext" */,
+				AD6654A32E8B264600A2C368 /* Release configuration for PBXNativeTarget "thumbext" */,
 			);
-			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
