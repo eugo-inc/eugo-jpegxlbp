@@ -22,8 +22,8 @@ class PreviewProvider: QLPreviewProvider, QLPreviewingController {
         }
         
         let reply = QLPreviewReply(dataOfContentType: .jpeg, contentSize: decodedImage.size) { replyToUpdate in
-            // 1. As the `decodedImage` is always a valid JPEG XL image at this momenet, this function **must** always succeed.
-            // 2. `compressionQuality` grows from 0 to 1 in contrast to `libjxl`'s `distance` which demonstrates the quality decreasing as
+            // 1. As the `decodedImage` is always a valid JPEG XL image at this moment, this function **must** always succeed, so we don't wrap it into `try-catch` for performance.
+            // 2. `compressionQuality` is an inverse of `distance` and grows from `0.0` to `1.0`. Find more details in  [`libjxl` docs](https://libjxl.readthedocs.io/en/latest/api_encoder.html#_CPPv429JxlEncoderDistanceFromQualityf).
             return decodedImage.jpegData(compressionQuality: 1.0)!
         }
 

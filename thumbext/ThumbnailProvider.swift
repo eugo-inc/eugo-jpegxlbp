@@ -22,8 +22,8 @@ class ThumbnailProvider: QLThumbnailProvider {
         _ handler: @escaping (QLThumbnailReply?, Error?) -> Void
     ) {
         // There are three ways to provide a thumbnail through a QLThumbnailReply. Only one of them should be used.
-        
-        // First way: Draw the thumbnail into the current context, set up with UIKit's coordinate system.
+        //
+        // We follow a way of drawing the thumbnail into the current graphics context, set up with UIKit's coordinate system.
         handler(QLThumbnailReply(contextSize: request.maximumSize, currentContextDrawing: { () -> Bool in
             // Draw the thumbnail here.
             do {
