@@ -59,6 +59,9 @@ For R'n'D purposes, we have a zoo of devices "frozen" to iOS / iPadOS 15 and 16,
         1. `-Xllvm` proxy-flag from `Other Swift Flags` requires special care. It doesn't support `-march` and `-mtune` - even on `x86_64`, it requires passing `-mcpu`. Good news, the CPU model names are the same for both `-march`, `-mtune`, and `-mcpu` on these platforms.
         2. `-target-cpu` from `Other Swift Flags` also requires passing the same CPU model value and doesn't have `-march` and `-mtune` analogues.
         3. @Important: When building for a Mac on the **same** Mac, you can simply pass `-march=native` and `-mtune=native` to allow the compiler to detect the CPU and squeeze every bit of performance out of it. Squirrels! 
+    4. To reduce the build time and avoid cryptic errors, exclude architectures you don't want to build via `"Build Settings"#"Excluded Architectures"`. 
+        1. By default, on macOS Catalyst, Xcode performs the multi-architecture (`x86_64` + `arm64`) build. 
+        2. We, however, by default, exclude `x86_64`, as `arm64` is the most common use case for this app, but if you want to build `x86_64` Mac Catalyst or iOS / iPadOS Simulator variant, you should do it the other way round and replace `x86_64` with `arm64`.
     
 > Be aware that Debug builds exhibit much lower performance than Release ones for `libjxl`. As a result, you shouldn't use them for benchmarking or daily use. They are subject to low-memory termination as App Extensions are limited to 50-100 MB of RAM, and the app quickly hits that limit in Debug builds, especially on older devices. 
 
