@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		AD6654622E8AEAF500A2C368 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD6654612E8AEAF500A2C368 /* QuickLook.framework */; };
 		AD66546E2E8AEAF500A2C368 /* previewext.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD66545F2E8AEAF400A2C368 /* previewext.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		AD6654772E8AF09C00A2C368 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AD6654762E8AF09C00A2C368 /* SDWebImage */; };
-		AD6654792E8AF0B200A2C368 /* SDWebImageJPEGXLCoder in Frameworks */ = {isa = PBXBuildFile; productRef = AD6654782E8AF0B200A2C368 /* SDWebImageJPEGXLCoder */; };
 		AD6654992E8B264500A2C368 /* QuickLookThumbnailing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD6654982E8B264500A2C368 /* QuickLookThumbnailing.framework */; };
 		AD6654A02E8B264500A2C368 /* thumbext.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AD6654972E8B264500A2C368 /* thumbext.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		AD6654A82E8B30DD00A2C368 /* SDWebImageJPEGXLCoder in Frameworks */ = {isa = PBXBuildFile; productRef = AD6654A72E8B30DD00A2C368 /* SDWebImageJPEGXLCoder */; };
-		AD6654AA2E8B30E000A2C368 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = AD6654A92E8B30E000A2C368 /* SDWebImage */; };
+		BF00000000000000000001B1 /* libjxl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF00000000000000000001A1 /* libjxl.xcframework */; };
+		BF00000000000000000001B2 /* libjxl.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF00000000000000000001A1 /* libjxl.xcframework */; };
+		BF00000000000000000001C1 /* JXLDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF00000000000000000001A2 /* JXLDecoder.swift */; };
+		BF00000000000000000001C2 /* JXLDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF00000000000000000001A2 /* JXLDecoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,9 +53,9 @@
 		AD6654612E8AEAF500A2C368 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		AD6654972E8B264500A2C368 /* thumbext.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = thumbext.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD6654982E8B264500A2C368 /* QuickLookThumbnailing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLookThumbnailing.framework; path = System/Library/Frameworks/QuickLookThumbnailing.framework; sourceTree = SDKROOT; };
-		AD6654A52E8B30D100A2C368 /* SDWebImage */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SDWebImage; path = "/Users/gorloff/Library/Developer/Xcode/DerivedData/jpegxlbp-allyhdfngzknexdicixdlqfejycm/SourcePackages/checkouts/SDWebImage"; sourceTree = "<absolute>"; };
-		AD6654A62E8B30D800A2C368 /* SDWebImageJPEGXLCoder */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SDWebImageJPEGXLCoder; path = "/Users/gorloff/Library/Developer/Xcode/DerivedData/jpegxlbp-allyhdfngzknexdicixdlqfejycm/SourcePackages/checkouts/SDWebImageJPEGXLCoder"; sourceTree = "<absolute>"; };
 		ADA194212F3F40A000F26337 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BF00000000000000000001A1 /* libjxl.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libjxl.xcframework; path = vendor/libjxl.xcframework; sourceTree = "<group>"; };
+		BF00000000000000000001A2 /* JXLDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JXLDecoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -118,16 +118,14 @@
 		AD66545C2E8AEAF400A2C368 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
-				AD6654792E8AF0B200A2C368 /* SDWebImageJPEGXLCoder in Frameworks */,
-				AD6654772E8AF09C00A2C368 /* SDWebImage in Frameworks */,
+				BF00000000000000000001B1 /* libjxl.xcframework in Frameworks */,
 				AD6654622E8AEAF500A2C368 /* QuickLook.framework in Frameworks */,
 			);
 		};
 		AD6654942E8B264500A2C368 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			files = (
-				AD6654AA2E8B30E000A2C368 /* SDWebImage in Frameworks */,
-				AD6654A82E8B30DD00A2C368 /* SDWebImageJPEGXLCoder in Frameworks */,
+				BF00000000000000000001B2 /* libjxl.xcframework in Frameworks */,
 				AD6654992E8B264500A2C368 /* QuickLookThumbnailing.framework in Frameworks */,
 			);
 		};
@@ -141,9 +139,18 @@
 				AD6654452E8AEAB800A2C368 /* jpegxlbp */,
 				AD6654632E8AEAF500A2C368 /* previewext */,
 				AD66549A2E8B264500A2C368 /* thumbext */,
+				BF00000000000000000001D1 /* Shared */,
 				AD6654602E8AEAF500A2C368 /* Frameworks */,
 				AD6654442E8AEAB800A2C368 /* Products */,
 			);
+			sourceTree = "<group>";
+		};
+		BF00000000000000000001D1 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				BF00000000000000000001A2 /* JXLDecoder.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		AD6654442E8AEAB800A2C368 /* Products */ = {
@@ -160,9 +167,8 @@
 			isa = PBXGroup;
 			children = (
 				AD6654612E8AEAF500A2C368 /* QuickLook.framework */,
-				AD6654A62E8B30D800A2C368 /* SDWebImageJPEGXLCoder */,
-				AD6654A52E8B30D100A2C368 /* SDWebImage */,
 				AD6654982E8B264500A2C368 /* QuickLookThumbnailing.framework */,
+				BF00000000000000000001A1 /* libjxl.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -207,10 +213,6 @@
 				AD6654632E8AEAF500A2C368 /* previewext */,
 			);
 			name = previewext;
-			packageProductDependencies = (
-				AD6654762E8AF09C00A2C368 /* SDWebImage */,
-				AD6654782E8AF0B200A2C368 /* SDWebImageJPEGXLCoder */,
-			);
 			productName = previewext;
 			productReference = AD66545F2E8AEAF400A2C368 /* previewext.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -229,10 +231,6 @@
 				AD66549A2E8B264500A2C368 /* thumbext */,
 			);
 			name = thumbext;
-			packageProductDependencies = (
-				AD6654A72E8B30DD00A2C368 /* SDWebImageJPEGXLCoder */,
-				AD6654A92E8B30E000A2C368 /* SDWebImage */,
-			);
 			productName = thumbext;
 			productReference = AD6654972E8B264500A2C368 /* thumbext.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -267,10 +265,6 @@
 			);
 			mainGroup = AD66543A2E8AEAB700A2C368;
 			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-				AD6654742E8AEF0F00A2C368 /* XCRemoteSwiftPackageReference "SDWebImageJPEGXLCoder" */,
-				AD6654752E8AF09C00A2C368 /* XCRemoteSwiftPackageReference "SDWebImage" */,
-			);
 			preferredProjectObjectVersion = 90;
 			productRefGroup = AD6654442E8AEAB800A2C368 /* Products */;
 			projectDirPath = "";
@@ -310,11 +304,13 @@
 		AD66545B2E8AEAF400A2C368 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				BF00000000000000000001C1 /* JXLDecoder.swift in Sources */,
 			);
 		};
 		AD6654932E8B264500A2C368 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			files = (
+				BF00000000000000000001C2 /* JXLDecoder.swift in Sources */,
 			);
 		};
 /* End PBXSourcesBuildPhase section */
@@ -475,6 +471,11 @@
 					"-mcpu=apple-a12",
 					"-mtune=apple-m4",
 				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(inherited)",
+					"-mcpu=apple-a12",
+					"-mtune=apple-m4",
+				);
 				OTHER_SWIFT_FLAGS = "-target-cpu apple-a12 -Xcc -mcpu=apple-a12 -Xcc -mtune=apple-m4 -Xllvm -mcpu=apple-a12";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -542,6 +543,11 @@
 					"-mcpu=apple-a12",
 					"-mtune=apple-m4",
 				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(inherited)",
+					"-mcpu=apple-a12",
+					"-mtune=apple-m4",
+				);
 				OTHER_SWIFT_FLAGS = "-target-cpu apple-a12 -Xcc -mcpu=apple-a12 -Xcc -mtune=apple-m4 -Xllvm -mcpu=apple-a12";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -562,6 +568,10 @@
 				INFOPLIST_KEY_CFBundleDisplayName = previewext;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/vendor",
+				);
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -595,6 +605,10 @@
 				INFOPLIST_KEY_CFBundleDisplayName = previewext;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/vendor",
+				);
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -628,6 +642,10 @@
 				INFOPLIST_KEY_CFBundleDisplayName = thumbext;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/vendor",
+				);
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -661,6 +679,10 @@
 				INFOPLIST_KEY_CFBundleDisplayName = thumbext;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/vendor",
+				);
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -719,48 +741,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		AD6654742E8AEF0F00A2C368 /* XCRemoteSwiftPackageReference "SDWebImageJPEGXLCoder" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImageJPEGXLCoder.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.0;
-			};
-		};
-		AD6654752E8AF09C00A2C368 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.21.6;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		AD6654762E8AF09C00A2C368 /* SDWebImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AD6654752E8AF09C00A2C368 /* XCRemoteSwiftPackageReference "SDWebImage" */;
-			productName = SDWebImage;
-		};
-		AD6654782E8AF0B200A2C368 /* SDWebImageJPEGXLCoder */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AD6654742E8AEF0F00A2C368 /* XCRemoteSwiftPackageReference "SDWebImageJPEGXLCoder" */;
-			productName = SDWebImageJPEGXLCoder;
-		};
-		AD6654A72E8B30DD00A2C368 /* SDWebImageJPEGXLCoder */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AD6654742E8AEF0F00A2C368 /* XCRemoteSwiftPackageReference "SDWebImageJPEGXLCoder" */;
-			productName = SDWebImageJPEGXLCoder;
-		};
-		AD6654A92E8B30E000A2C368 /* SDWebImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = AD6654752E8AF09C00A2C368 /* XCRemoteSwiftPackageReference "SDWebImage" */;
-			productName = SDWebImage;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AD66543B2E8AEAB700A2C368 /* Project object */;
 }

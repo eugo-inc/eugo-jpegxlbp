@@ -4,7 +4,7 @@ This is a small sample project demonstrating how to backport JPEG XL support to 
 It allows viewing JPEG XL images (`.jxl`) natively in the QuickLook Preview (e.g., in Files or Finder app). 
 What's more, it automatically generates thumbnails for them.
 
-It's implemented as a thin wrapper around [SDWebImageJPEGXLCoder](https://github.com/SDWebImage/SDWebImageJPEGXLCoder.git), which in turn wraps around reference JPEG XL implementation - [libjxl](https://github.com/SDWebImage/libjxl-Xcode).
+It's implemented as a thin Swift wrapper around the reference JPEG XL implementation, [`libjxl`](https://github.com/libjxl/libjxl). `libjxl` is built locally as a static `XCFramework` (see [Build Instructions](#build-instructions)) so we control its compilation flags directly — earlier revisions used `SDWebImageJPEGXLCoder` via SPM, but Swift Package Manager doesn't propagate the consumer's `-mcpu`/`-mtune` into dependency builds, leaving `libjxl`'s SIMD/Highway codegen un-tuned.
 
 ---
 
@@ -32,8 +32,7 @@ For R'n'D purposes, we have a zoo of devices "frozen" to iOS / iPadOS 15 and 16,
     1. iOS / iPadOS: 15 and 16. 
         1. Newer versions are also supported, but as said, you probably don't want to use this backport on them due to native JPEG XL support.
         2. The iOS / iPadOS Simulator target is supported and tested thoroughly during development. Be aware that you'll need to manually [inject](https://stackoverflow.com/questions/48884248/how-can-i-add-files-to-the-ios-simulator) your test files into the simulator, as it refuses to copy-paste unsupported image formats.
-    2. macOS support is available via the Mac Catalyst target, but it has never been tested. 
-        1. (!) There is a reported issue when `SDWebImageJPEGXLCoder` is built for macOS AppKit runtime: https://github.com/SDWebImage/SDWebImageJPEGXLCoder/issues/3
+    2. macOS support is available via the Mac Catalyst target, but it has never been tested.
 2. CPU: Apple A12+ - will almost certainly work on all modern `arm64` Apple Silicons, but hasn't been tested on older targets. You're welcome to adjust the build settings (see below) and let me know if older targets are supported!
 3. Jailbreak: not required. Private APIs aren't used either.
 
@@ -51,25 +50,45 @@ For R'n'D purposes, we have a zoo of devices "frozen" to iOS / iPadOS 15 and 16,
 
 
 ## Build Instructions
-1. Adjust the Development Team for signing. Xcode may also ask you to adjust the bundle identifiers to unique strings. In this case, simply append a random number to the existing identifiers of both the host app and all app extensions.
-2. Underlying dependencies (like `libjxl` and, transitively, `brotli`) hugely benefits from SIMD intrinsics, so the build is configured to minimally target Apple A12 (`-mcpu`) but also benefit from dynamic dispatch of instructions found in newer CPUs up to the latest (at the moment of writing) Apple M5 (`-mtune`). 
-    1. If building for older devices, you should adjust the `-mcpu=` value appropriately for your target. 
-    2. If you're building for newer devices, you can get higher performance in the same way - by adjusting `-mcpu` to your oldest supported CPU. If you only have 1 target CPU, you set it with `-mcpu` and remove `-mtune` entirely.
-    3. For Intel Macs and iOS / iPadOS Simulators on them, you should use `-march` in place of `-mcpu`. Moreover, even if you support only 1 CPU model, you shouldn't remove `-mtune` but set it to be equal to the same value as `-mcpu`. For example, `-march=sapphirerapids -mtune=sapphirerapids`. A few exceptions apply:
-        1. `-Xllvm` proxy-flag from `Other Swift Flags` requires special care. It doesn't support `-march` and `-mtune` - even on `x86_64`, it requires passing `-mcpu`. Good news, the CPU model names are the same for both `-march`, `-mtune`, and `-mcpu` on these platforms.
-        2. `-target-cpu` from `Other Swift Flags` also requires passing the same CPU model value and doesn't have `-march` and `-mtune` analogues.
-        3. @Important: When building for a Mac on the **same** Mac, you can simply pass `-march=native` and `-mtune=native` to allow the compiler to detect the CPU and squeeze every bit of performance out of it. Squirrels! 
-    4. To reduce the build time and avoid cryptic errors, exclude architectures you don't want to build via `"Build Settings"#"Excluded Architectures"`. 
-        1. By default, on macOS Catalyst, Xcode performs the multi-architecture (`x86_64` + `arm64`) build. 
-        2. We, however, by default, exclude `x86_64`, as `arm64` is the most common use case for this app, but if you want to build `x86_64` Mac Catalyst or iOS / iPadOS Simulator variant, you should do it the other way round and replace `x86_64` with `arm64`.
-    
-> Be aware that Debug builds exhibit much lower performance than Release ones for `libjxl`. As a result, you shouldn't use them for benchmarking or daily use. They are subject to low-memory termination as App Extensions are limited to 50-100 MB of RAM, and the app quickly hits that limit in Debug builds, especially on older devices. 
 
----
+Building is a two-step process: first build the `libjxl` `XCFramework`, then build the app/extensions in Xcode.
 
+### 1. Build the `libjxl` `XCFramework`
 
-## TODOs:
+```bash
+scripts/build-libjxl-xcframework.sh                                 # defaults: --mcpu apple-a12, no -mtune
+scripts/build-libjxl-xcframework.sh --mcpu apple-a12 --mtune apple-m4  # current project default
+scripts/build-libjxl-xcframework.sh --mcpu apple-a14                 # newer device baseline (M1+/A14+)
 
-1. Redesign to propagate optimization flags down to SPM packages. This doesn't work out of the box, so the dependencies don't have the same optimizations as the app and extensions.
+# Different baselines per platform — Catalyst-only Macs are M1+, so they can
+# afford a higher --mcpu than what iOS devices need:
+scripts/build-libjxl-xcframework.sh \
+  --ios-mcpu apple-a12 --ios-mtune apple-m4 \
+  --catalyst-mcpu apple-a14 --catalyst-mtune apple-m4
+
+scripts/build-libjxl-xcframework.sh --help                           # full list of flags
+```
+
+The script clones [`libjxl`](https://github.com/libjxl/libjxl) at the configured tag (default `v0.11.1`), builds the **decoder-only** path (no encoder, tools, plugins, examples, or tests), merges the resulting static archives — `libjxl_dec`, `libhwy`, `libbrotli{dec,common}`, `libskcms` — into a single `.a` per slice via `libtool`, and packages the result as `vendor/libjxl.xcframework/`. The bundle includes a synthesized `module.modulemap` so Swift can `import libjxl` directly.
+
+`vendor/libjxl.xcframework/` is `.gitignore`d. Re-run the script whenever you change CPU flags, the `libjxl` tag, or pull a fresh checkout.
+
+### 2. Build the app/extensions in Xcode
+
+1. Open `jpegxlbp.xcodeproj`.
+2. Adjust the Development Team for signing. Xcode may also ask you to adjust the bundle identifiers to unique strings. In this case, simply append a random number to the existing identifiers of both the host app and all app extensions.
+3. Build / run as usual.
+
+### CPU-tuning flags
+
+Performance-critical code (`libjxl`, [`Highway`](https://github.com/google/highway), `brotli`, `skcms`) is built by `scripts/build-libjxl-xcframework.sh`, so the **script's `--mcpu` / `--mtune` / `--march` flags are the perf knob that actually matters**. The Xcode project also carries identical flags in `OTHER_CFLAGS`, `OTHER_CPLUSPLUSFLAGS`, and `OTHER_SWIFT_FLAGS` (project-level Debug + Release) so our small Swift wrapper and any future C/C++ source compiles consistently. Keep both sets in sync when retargeting.
+
+1. **`-mcpu` vs `-mtune` on AArch64.** `-mcpu=X` sets *both* the instruction-set baseline and the tuning model for X. `-mtune=Y` *overrides* tuning to Y while keeping the X instruction-set baseline. The default `--mcpu apple-a12 --mtune apple-m4` produces "one binary, runs on A12+, scheduled for M4." If you ship per-CPU binaries, drop `--mtune` entirely and let `--mcpu` imply the tuning. Don't try to mirror the value (`--mcpu X --mtune X`) — it's the same as `--mcpu X` alone.
+2. **Per-platform baselines.** `--mcpu`/`--mtune`/`--march` set the global default. `--ios-*` and `--catalyst-*` override those for the corresponding slices. Catalyst-only Macs are M1+, so a higher Catalyst baseline (`--catalyst-mcpu apple-a14` or higher) is a free perf win without affecting iOS device support. iOS device + iOS simulator slices both follow the `--ios-*` settings.
+3. **`Highway` runtime SIMD dispatch.** `Highway` picks the best available SIMD path *at runtime*, so static `--mcpu` mainly controls which `Highway` baselines compile in (NEON, SVE, etc.) and scalar codegen — not which path actually runs. The biggest wins from raising `--mcpu` come on devices with new ISA features (e.g., SVE on M4+).
+4. **Intel x86_64.** For x86_64 Mac / Simulator slices, use `--march=...` (clang doesn't accept `-mcpu` on x86). The Swift-side `-target-cpu` and `-Xllvm -mcpu` flags in `project.pbxproj` *do* take `-mcpu`-style values even on x86 — they have no `-march` / `-mtune` equivalents. CPU model names are the same across `-march`, `-mtune`, and `-mcpu`. When building on the same Mac you'll target, `--march native` / `--mtune native` lets clang detect and squeeze everything out. Squirrels!
+5. **Excluded architectures.** `EXCLUDED_ARCHS = x86_64` is set in `project.pbxproj`, so Catalyst / Simulator builds default to `arm64` only. To build `x86_64` slices, flip that to `arm64` and pass `--include-x86_64 --march=...` to the `libjxl` script.
+
+> Debug builds of `libjxl` are dramatically slower than Release. They're subject to low-memory termination as App Extensions are capped at 50–100 MB of RAM, and the app quickly hits that limit in Debug, especially on older devices. Always benchmark / daily-drive Release.
 
 ---
