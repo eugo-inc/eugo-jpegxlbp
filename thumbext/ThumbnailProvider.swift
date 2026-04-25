@@ -9,13 +9,10 @@
 import UIKit
 import QuickLookThumbnailing
 
-import SDWebImage
-import SDWebImageJPEGXLCoder
-
 
 final
 class ThumbnailProvider: QLThumbnailProvider {
-    
+
     override
     func provideThumbnail(
         for request: QLFileThumbnailRequest,
@@ -28,18 +25,15 @@ class ThumbnailProvider: QLThumbnailProvider {
             // Draw the thumbnail here.
             do {
                 let jpegxlData = try Data(contentsOf: request.fileURL)
-                
-                let decodingOptions: [SDImageCoderOption : Any] = [
-                    .decodeThumbnailPixelSize: request.maximumSize,
-                    .decodeScaleFactor: request.scale,
-                    .decodePreserveAspectRatio: true
-                ]
-                guard let decodedImage = SDImageJPEGXLCoder.shared.decodedImage(with: jpegxlData, options: decodingOptions) else {
-                    throw NSError(domain: "eugo", code: 1161)
-                }
-                
+
+                // Cap the longest side at the requested maximum so we never
+                // hold a full-resolution decode in extension memory longer
+                // than necessary.
+                let maxSide = max(request.maximumSize.width, request.maximumSize.height) * request.scale
+                let decodedImage = try JXLDecoder.decode(jpegxlData, maxDimension: maxSide)
+
                 decodedImage.draw(in: CGRect(origin: .zero, size: request.maximumSize))
-                
+
                 // Return true if the thumbnail was successfully drawn inside this block.
                 return true
             } catch {
@@ -48,5 +42,5 @@ class ThumbnailProvider: QLThumbnailProvider {
             }
         }), nil)
     }
-    
+
 }

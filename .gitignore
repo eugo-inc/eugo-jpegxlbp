@@ -1,0 +1,6 @@
+# Build artifacts produced by scripts/build-libjxl-xcframework.sh.
+# vendor/libjxl.xcframework is referenced by the .xcodeproj but is not
+# committed — regenerate it with the script. .build/ is the script's scratch
+# work directory.
+.build/
+vendor/libjxl.xcframework/
