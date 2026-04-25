@@ -15,6 +15,8 @@
 #                           may use. Lower = wider device support, higher = better
 #                           codegen. Apple's published mappings: apple-a12 (A12),
 #                           apple-a14 (A14/M1), apple-a16 (A16), apple-m4, etc.
+#                           Used as default for all platforms; override per
+#                           platform with --ios-mcpu / --catalyst-mcpu below.
 #   --mtune <model>         AArch64 tuning model (default: empty / not passed).
 #                           When set, schedules code for that newer microarch
 #                           while keeping the --mcpu instruction-set baseline.
@@ -25,6 +27,16 @@
 #   --march <model>         x86_64 baseline CPU (default: empty). Required for
 #                           Intel Mac / Intel Simulator slices. Mutually
 #                           exclusive with --mcpu for those slices.
+#
+#   --ios-mcpu <model>      Override --mcpu for iOS device + iOS simulator
+#   --ios-mtune <model>     slices specifically. Useful when iOS needs an
+#   --ios-march <model>     older CPU baseline than Catalyst (Apple Silicon).
+#                           Each defaults to the matching global flag.
+#   --catalyst-mcpu <model> Override --mcpu / --mtune / --march for Mac
+#   --catalyst-mtune <model> Catalyst slices specifically. Catalyst-only Macs
+#   --catalyst-march <model> are M1+ today, so --catalyst-mcpu apple-a14 (or
+#                           higher) is a safe perf win there. Each defaults
+#                           to the matching global flag.
 #   --libjxl-tag <tag>      libjxl git tag/ref (default: v0.11.1).
 #   --min-ios <ver>         iOS deployment target (default: 15.0).
 #   --skip-catalyst         Skip Mac Catalyst slices.
@@ -57,6 +69,13 @@ set -euo pipefail
 MCPU="apple-a12"
 MTUNE=""
 MARCH=""
+# Per-platform overrides; empty = fall back to MCPU/MTUNE/MARCH.
+IOS_MCPU=""
+IOS_MTUNE=""
+IOS_MARCH=""
+CAT_MCPU=""
+CAT_MTUNE=""
+CAT_MARCH=""
 LIBJXL_TAG="v0.11.1"
 MIN_IOS="15.0"
 SKIP_CATALYST=0
@@ -73,6 +92,12 @@ while [[ $# -gt 0 ]]; do
     --mcpu)             MCPU="$2"; shift 2 ;;
     --mtune)            MTUNE="$2"; shift 2 ;;
     --march)            MARCH="$2"; shift 2 ;;
+    --ios-mcpu)         IOS_MCPU="$2"; shift 2 ;;
+    --ios-mtune)        IOS_MTUNE="$2"; shift 2 ;;
+    --ios-march)        IOS_MARCH="$2"; shift 2 ;;
+    --catalyst-mcpu)    CAT_MCPU="$2"; shift 2 ;;
+    --catalyst-mtune)   CAT_MTUNE="$2"; shift 2 ;;
+    --catalyst-march)   CAT_MARCH="$2"; shift 2 ;;
     --libjxl-tag)       LIBJXL_TAG="$2"; shift 2 ;;
     --min-ios)          MIN_IOS="$2"; shift 2 ;;
     --skip-catalyst)    SKIP_CATALYST=1; shift ;;
@@ -89,6 +114,19 @@ while [[ $# -gt 0 ]]; do
 done
 
 [[ -z "$JOBS" ]] && JOBS="$(sysctl -n hw.ncpu 2>/dev/null || echo 4)"
+
+# Resolve per-platform CPU flags by falling back to the globals when the
+# per-platform override wasn't passed. Note: an explicit empty value via the
+# CLI ("--ios-mtune ''") still falls through to the global because of the :-
+# operator — which is the right call for ergonomics. To omit a flag for one
+# platform but keep it on another, leave the global unset and only set the
+# platform that needs it.
+IOS_MCPU="${IOS_MCPU:-$MCPU}"
+IOS_MTUNE="${IOS_MTUNE:-$MTUNE}"
+IOS_MARCH="${IOS_MARCH:-$MARCH}"
+CAT_MCPU="${CAT_MCPU:-$MCPU}"
+CAT_MTUNE="${CAT_MTUNE:-$MTUNE}"
+CAT_MARCH="${CAT_MARCH:-$MARCH}"
 
 # ---- preflight --------------------------------------------------------------
 if [[ "$(uname -s)" != "Darwin" ]]; then
@@ -118,12 +156,16 @@ else
 fi
 
 # ---- per-slice build helper -------------------------------------------------
-# build_slice <slice_name> <sdk> <arch> <cmake_system_name> <extra_cmake_args...>
+# build_slice <slice_name> <sdk> <arch> <cmake_system_name> \
+#             <mcpu> <mtune> <march> [<extra_cmake_args>...]
 build_slice() {
   local slice="$1"; shift
   local sdk="$1"; shift
   local arch="$1"; shift
   local system_name="$1"; shift
+  local slice_mcpu="$1"; shift
+  local slice_mtune="$1"; shift
+  local slice_march="$1"; shift
 
   local build_dir="$WORK_DIR/build/$slice"
   local install_dir="$WORK_DIR/install/$slice"
@@ -132,15 +174,15 @@ build_slice() {
   # Compose -mcpu / -mtune / -march into a single CFLAGS/CXXFLAGS string.
   local cpu_flags=""
   if [[ "$arch" == "x86_64" ]]; then
-    if [[ -n "$MARCH" ]]; then
-      cpu_flags="-march=$MARCH"
-      [[ -n "$MTUNE" ]] && cpu_flags="$cpu_flags -mtune=$MTUNE"
+    if [[ -n "$slice_march" ]]; then
+      cpu_flags="-march=$slice_march"
+      [[ -n "$slice_mtune" ]] && cpu_flags="$cpu_flags -mtune=$slice_mtune"
     else
       echo "warn: building $slice ($arch) without --march; codegen will be generic" >&2
     fi
   else
-    cpu_flags="-mcpu=$MCPU"
-    [[ -n "$MTUNE" ]] && cpu_flags="$cpu_flags -mtune=$MTUNE"
+    cpu_flags="-mcpu=$slice_mcpu"
+    [[ -n "$slice_mtune" ]] && cpu_flags="$cpu_flags -mtune=$slice_mtune"
   fi
 
   echo "==> Configuring $slice ($arch, $sdk) [$cpu_flags]"
@@ -219,14 +261,17 @@ build_slice() {
 }
 
 # ---- iOS device (arm64) -----------------------------------------------------
-build_slice ios-arm64 iphoneos arm64 iOS
+build_slice ios-arm64 iphoneos arm64 iOS \
+  "$IOS_MCPU" "$IOS_MTUNE" "$IOS_MARCH"
 
 # ---- iOS simulator ----------------------------------------------------------
 if [[ "$SKIP_SIMULATOR" -eq 0 ]]; then
   build_slice ios-sim-arm64 iphonesimulator arm64 iOS \
+    "$IOS_MCPU" "$IOS_MTUNE" "$IOS_MARCH" \
     -DCMAKE_OSX_SYSROOT="$(xcrun --sdk iphonesimulator --show-sdk-path)"
   if [[ "$INCLUDE_X86_64" -eq 1 ]]; then
-    build_slice ios-sim-x86_64 iphonesimulator x86_64 iOS
+    build_slice ios-sim-x86_64 iphonesimulator x86_64 iOS \
+      "$IOS_MCPU" "$IOS_MTUNE" "$IOS_MARCH"
   fi
 fi
 
@@ -237,10 +282,12 @@ if [[ "$SKIP_CATALYST" -eq 0 ]]; then
   CATALYST_FLAGS_ARM="-target arm64-apple-ios${MIN_IOS}-macabi"
   CATALYST_FLAGS_X64="-target x86_64-apple-ios${MIN_IOS}-macabi"
   build_slice catalyst-arm64 macosx arm64 Darwin \
+    "$CAT_MCPU" "$CAT_MTUNE" "$CAT_MARCH" \
     -DCMAKE_C_FLAGS="$CATALYST_FLAGS_ARM" \
     -DCMAKE_CXX_FLAGS="$CATALYST_FLAGS_ARM"
   if [[ "$INCLUDE_X86_64" -eq 1 ]]; then
     build_slice catalyst-x86_64 macosx x86_64 Darwin \
+      "$CAT_MCPU" "$CAT_MTUNE" "$CAT_MARCH" \
       -DCMAKE_C_FLAGS="$CATALYST_FLAGS_X64" \
       -DCMAKE_CXX_FLAGS="$CATALYST_FLAGS_X64"
   fi

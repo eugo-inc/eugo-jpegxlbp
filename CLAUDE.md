@@ -17,6 +17,12 @@ scripts/build-libjxl-xcframework.sh                    # defaults: apple-a12, no
 scripts/build-libjxl-xcframework.sh --mcpu apple-a14   # newer CPU baseline
 scripts/build-libjxl-xcframework.sh --mcpu apple-a12 --mtune apple-m4
 
+# Per-platform overrides (Catalyst is M1+ today, so it can take a higher
+# baseline than what iOS device slices need):
+scripts/build-libjxl-xcframework.sh \
+  --ios-mcpu apple-a12 --ios-mtune apple-m4 \
+  --catalyst-mcpu apple-a14 --catalyst-mtune apple-m4
+
 # 2. Build the app / extension as usual via Xcode or xcodebuild.
 xcodebuild -project jpegxlbp.xcodeproj -scheme jpegxlbp \
   -destination 'platform=iOS Simulator,name=iPhone 15' build
@@ -37,10 +43,12 @@ Notes when building:
 
 Two places hold CPU flags and **must stay in sync**:
 
-1. The XCFramework build — pass `--mcpu` (and optionally `--mtune`/`--march`) to `scripts/build-libjxl-xcframework.sh`. This is what governs libjxl/Highway/Brotli codegen, which is the perf-critical part.
-2. The Xcode project — `OTHER_CFLAGS` and `OTHER_SWIFT_FLAGS` in the project-level Debug+Release configs in `project.pbxproj` (currently `-mcpu=apple-a12 -mtune=apple-m4`). This governs our Swift code (which is small) and how Swift cross-imports libjxl.
+1. The XCFramework build — pass `--mcpu` (and optionally `--mtune`/`--march`) to `scripts/build-libjxl-xcframework.sh`. This is what governs libjxl/Highway/Brotli codegen, which is the perf-critical part. The script also accepts per-platform overrides: `--ios-mcpu`/`--ios-mtune`/`--ios-march` for iOS device + simulator slices, `--catalyst-mcpu`/`--catalyst-mtune`/`--catalyst-march` for Catalyst slices. Each per-platform flag falls back to the corresponding global flag when unset, so the simple form (`--mcpu X`) still applies everywhere.
+2. The Xcode project — `OTHER_CFLAGS`, `OTHER_CPLUSPLUSFLAGS`, and `OTHER_SWIFT_FLAGS` in the project-level Debug+Release configs in `project.pbxproj` (currently `-mcpu=apple-a12 -mtune=apple-m4`). This governs our Swift code (which is small) and how Swift cross-imports libjxl. There's no per-platform split here — Xcode applies these uniformly across iOS / Catalyst targets.
 
 `-mcpu` vs `-mtune` on AArch64: `-mcpu=X` sets *both* the instruction-set baseline and the tuning model for X. `-mtune=Y` then *overrides* tuning to Y while keeping the X instruction-set baseline. So `-mcpu=apple-a12 -mtune=apple-m4` means "binary runs on A12+, scheduled for M4." Drop `-mtune` only if you ship per-CPU binaries — for a single fat binary that supports A12 through current chips, the dual flag is correct.
+
+Per-platform note: Catalyst-only Macs are M1+ (i.e., A14-equivalent at minimum), so `--catalyst-mcpu apple-a14` (or higher) is a free perf win that doesn't affect iOS device support. The script's iOS slices are the constraint, not Catalyst.
 
 Note that libjxl uses [Highway](https://github.com/google/highway) for SIMD and dispatches at *runtime* — so `--mcpu` mainly governs which Highway baselines compile in (NEON, SVE, etc.) and scalar codegen, not which SIMD path actually runs. The biggest wins from raising `--mcpu` come on devices that gain new ISA features (e.g., SVE on M4+).
 

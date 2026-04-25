@@ -59,6 +59,13 @@ Building is a two-step process: first build the `libjxl` `XCFramework`, then bui
 scripts/build-libjxl-xcframework.sh                                 # defaults: --mcpu apple-a12, no -mtune
 scripts/build-libjxl-xcframework.sh --mcpu apple-a12 --mtune apple-m4  # current project default
 scripts/build-libjxl-xcframework.sh --mcpu apple-a14                 # newer device baseline (M1+/A14+)
+
+# Different baselines per platform — Catalyst-only Macs are M1+, so they can
+# afford a higher --mcpu than what iOS devices need:
+scripts/build-libjxl-xcframework.sh \
+  --ios-mcpu apple-a12 --ios-mtune apple-m4 \
+  --catalyst-mcpu apple-a14 --catalyst-mtune apple-m4
+
 scripts/build-libjxl-xcframework.sh --help                           # full list of flags
 ```
 
@@ -77,9 +84,10 @@ The script clones [`libjxl`](https://github.com/libjxl/libjxl) at the configured
 Performance-critical code (`libjxl`, [`Highway`](https://github.com/google/highway), `brotli`, `skcms`) is built by `scripts/build-libjxl-xcframework.sh`, so the **script's `--mcpu` / `--mtune` / `--march` flags are the perf knob that actually matters**. The Xcode project also carries identical flags in `OTHER_CFLAGS`, `OTHER_CPLUSPLUSFLAGS`, and `OTHER_SWIFT_FLAGS` (project-level Debug + Release) so our small Swift wrapper and any future C/C++ source compiles consistently. Keep both sets in sync when retargeting.
 
 1. **`-mcpu` vs `-mtune` on AArch64.** `-mcpu=X` sets *both* the instruction-set baseline and the tuning model for X. `-mtune=Y` *overrides* tuning to Y while keeping the X instruction-set baseline. The default `--mcpu apple-a12 --mtune apple-m4` produces "one binary, runs on A12+, scheduled for M4." If you ship per-CPU binaries, drop `--mtune` entirely and let `--mcpu` imply the tuning. Don't try to mirror the value (`--mcpu X --mtune X`) — it's the same as `--mcpu X` alone.
-2. **`Highway` runtime SIMD dispatch.** `Highway` picks the best available SIMD path *at runtime*, so static `--mcpu` mainly controls which `Highway` baselines compile in (NEON, SVE, etc.) and scalar codegen — not which path actually runs. The biggest wins from raising `--mcpu` come on devices with new ISA features (e.g., SVE on M4+).
-3. **Intel x86_64.** For x86_64 Mac / Simulator slices, use `--march=...` (clang doesn't accept `-mcpu` on x86). The Swift-side `-target-cpu` and `-Xllvm -mcpu` flags in `project.pbxproj` *do* take `-mcpu`-style values even on x86 — they have no `-march` / `-mtune` equivalents. CPU model names are the same across `-march`, `-mtune`, and `-mcpu`. When building on the same Mac you'll target, `--march native` / `--mtune native` lets clang detect and squeeze everything out. Squirrels!
-4. **Excluded architectures.** `EXCLUDED_ARCHS = x86_64` is set in `project.pbxproj`, so Catalyst / Simulator builds default to `arm64` only. To build `x86_64` slices, flip that to `arm64` and pass `--include-x86_64 --march=...` to the `libjxl` script.
+2. **Per-platform baselines.** `--mcpu`/`--mtune`/`--march` set the global default. `--ios-*` and `--catalyst-*` override those for the corresponding slices. Catalyst-only Macs are M1+, so a higher Catalyst baseline (`--catalyst-mcpu apple-a14` or higher) is a free perf win without affecting iOS device support. iOS device + iOS simulator slices both follow the `--ios-*` settings.
+3. **`Highway` runtime SIMD dispatch.** `Highway` picks the best available SIMD path *at runtime*, so static `--mcpu` mainly controls which `Highway` baselines compile in (NEON, SVE, etc.) and scalar codegen — not which path actually runs. The biggest wins from raising `--mcpu` come on devices with new ISA features (e.g., SVE on M4+).
+4. **Intel x86_64.** For x86_64 Mac / Simulator slices, use `--march=...` (clang doesn't accept `-mcpu` on x86). The Swift-side `-target-cpu` and `-Xllvm -mcpu` flags in `project.pbxproj` *do* take `-mcpu`-style values even on x86 — they have no `-march` / `-mtune` equivalents. CPU model names are the same across `-march`, `-mtune`, and `-mcpu`. When building on the same Mac you'll target, `--march native` / `--mtune native` lets clang detect and squeeze everything out. Squirrels!
+5. **Excluded architectures.** `EXCLUDED_ARCHS = x86_64` is set in `project.pbxproj`, so Catalyst / Simulator builds default to `arm64` only. To build `x86_64` slices, flip that to `arm64` and pass `--include-x86_64 --march=...` to the `libjxl` script.
 
 > Debug builds of `libjxl` are dramatically slower than Release. They're subject to low-memory termination as App Extensions are capped at 50–100 MB of RAM, and the app quickly hits that limit in Debug, especially on older devices. Always benchmark / daily-drive Release.
 
