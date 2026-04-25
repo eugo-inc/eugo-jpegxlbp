@@ -471,6 +471,11 @@
 					"-mcpu=apple-a12",
 					"-mtune=apple-m4",
 				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(inherited)",
+					"-mcpu=apple-a12",
+					"-mtune=apple-m4",
+				);
 				OTHER_SWIFT_FLAGS = "-target-cpu apple-a12 -Xcc -mcpu=apple-a12 -Xcc -mtune=apple-m4 -Xllvm -mcpu=apple-a12";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -538,6 +543,11 @@
 					"-mcpu=apple-a12",
 					"-mtune=apple-m4",
 				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(inherited)",
+					"-mcpu=apple-a12",
+					"-mtune=apple-m4",
+				);
 				OTHER_SWIFT_FLAGS = "-target-cpu apple-a12 -Xcc -mcpu=apple-a12 -Xcc -mtune=apple-m4 -Xllvm -mcpu=apple-a12";
 				SDKROOT = iphoneos;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
@@ -558,6 +568,10 @@
 				INFOPLIST_KEY_CFBundleDisplayName = previewext;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/vendor",
+				);
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -591,6 +605,10 @@
 				INFOPLIST_KEY_CFBundleDisplayName = previewext;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/vendor",
+				);
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -624,6 +642,10 @@
 				INFOPLIST_KEY_CFBundleDisplayName = thumbext;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/vendor",
+				);
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -657,6 +679,10 @@
 				INFOPLIST_KEY_CFBundleDisplayName = thumbext;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/vendor",
+				);
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
