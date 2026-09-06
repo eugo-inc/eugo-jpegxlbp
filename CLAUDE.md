@@ -6,6 +6,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Backport of native JPEG XL (`.jxl`) viewing/thumbnailing to iOS / iPadOS 15 and 16 (which predate Apple's built-in support added in iOS 17). Decoding goes through a vendored libjxl XCFramework via a thin Swift wrapper (`Shared/JXLDecoder.swift`); SPM dependencies have been removed so we control libjxl's build flags. Mac Catalyst is configured but untested. There is no test suite.
 
+## Routing — the moment X happens, your next tool call is that Read
+
+These eight rows are the org-wide discipline, served by the kit installed at `.claude/docs/guardrails/`; this repo's own material stays the more specific instruction wherever the two overlap.
+
+| The moment you... | Read |
+|---|---|
+| realize the task needs >2 file edits or edits in >1 top-level directory, or are about to Edit a 3rd file with no TASK block posted | `.claude/docs/guardrails/PLAN.md` |
+| are about to create or modify a repo file — Edit, Write, or a shell command that writes files — for the first time since session start or the last compaction | `.claude/docs/guardrails/CODE.md` |
+| touch a dates / epochs / mutation-vs-copy / async / floats / sort / division-modulo / regex / familiar-API / closures / boolean-logic category | `.claude/docs/guardrails/TRAPS.md` |
+| see a test you expected to pass fail, a build/test/run command exit non-zero, a traceback, output contradicting your prediction, or an unreproduced bug | `.claude/docs/guardrails/DEBUG.md` |
+| are about to write "done" / "fixed" / "works" / "passing" / "complete" / "resolved" / "ready", or run git commit / gh pr create | `.claude/docs/guardrails/VERIFY.md` |
+| are about to write a verdict, finding, recommendation, or the turn's final answer to the user | `.claude/docs/guardrails/REPORT.md` |
+| are about to Read a 3rd file over 300 lines, or a search returned >50 hits | `.claude/docs/guardrails/EFFICIENCY.md` |
+| return from compaction or /resume, the user pauses ("stop", "later"), or a task spanning a compaction has no `.claude/docs/guardrails/STATE.md` | `.claude/docs/guardrails/SESSION.md` |
+
+Row matched: your next tool call is that Read, before any acting tool call. 2+ rows match →
+do each, in table order. Refresh with
+`eugo-skills install eugo-guardrails-kit --from <athena> --into .` — never hand-edit those
+files, a refresh overwrites them; propose defects back to athena instead.
+
 ## Build / run
 
 Building requires macOS + Xcode (this is an Xcode project). Two-step build:
