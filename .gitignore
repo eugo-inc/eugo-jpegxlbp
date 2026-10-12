@@ -26,4 +26,5 @@ vendor/libjxl.xcframework/
 __pycache__/
 *.pyc
 *.bak
+.claude/rules/.eugo-central.md.*
 # <<< eugo-skills managed <<<
